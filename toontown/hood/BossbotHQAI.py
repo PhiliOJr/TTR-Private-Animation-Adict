@@ -48,6 +48,9 @@ class BossbotHQAI(CogHoodAI):
         # Make our doors.
         self.createDoor()
         
+        # Create Suit Planners in the cog playground and factory waiting area.
+        self.createSuitPlanner(self.HOOD)
+        
         # Create Cog Golf Courses.
         kartPos = ((154.762, 37.169, 0), (141.403, -81.887, 0), (-48.44, 15.308, 0))
         hprList = ((110.815, 0, 0), (61.231, 0, 0), (-105.481, 0, 0))

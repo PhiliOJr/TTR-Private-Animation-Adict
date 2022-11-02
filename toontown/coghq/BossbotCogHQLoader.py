@@ -11,6 +11,7 @@ from toontown.coghq import BossbotHQBossBattle
 from toontown.coghq import BossbotOfficeExterior
 from toontown.coghq import CountryClubInterior
 from panda3d.core import DecalEffect, TextEncoder
+from direct.actor.Actor import Actor
 import random
 aspectSF = 0.7227
 
@@ -25,8 +26,8 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
             state.addTransition('countryClubInterior')
 
         self.musicFile = random.choice(['phase_12/audio/bgm/Bossbot_Entry_v1.ogg', 'phase_12/audio/bgm/Bossbot_Entry_v2.ogg', 'phase_12/audio/bgm/Bossbot_Entry_v3.ogg'])
-        self.cogHQExteriorModelPath = 'phase_12/models/bossbotHQ/CogGolfHub'
-        self.cogHQLobbyModelPath = 'phase_12/models/bossbotHQ/CogGolfExterior'
+        self.cogHQExteriorModelPath = 'phase_12/models/bossbotHQ/CogGolfExterior'
+        self.cogHQLobbyModelPath = 'phase_12/models/bossbotHQ/CogGolfLobby'
         self.geom = None
         return
 
@@ -47,6 +48,10 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
         self.notify.debug('zoneId = %d ToontownGlobals.BossbotHQ=%d' % (zoneId, ToontownGlobals.BossbotHQ))
         if zoneId == ToontownGlobals.BossbotHQ:
             self.geom = loader.loadModel(self.cogHQExteriorModelPath)
+            self.extra = Actor("phase_12/models/bossbotHQ/ttr_m_bossbothq_sky")
+            self.extra.reparentTo(self.geom)
+            self.extra.setPos(0,0,0)
+            self.extra.setScale(2.0)
             gzLinkTunnel = self.geom.find('**/LinkTunnel1')
             gzLinkTunnel.setName('linktunnel_gz_17000_DNARoot')
             self.makeSigns()
@@ -58,6 +63,10 @@ class BossbotCogHQLoader(CogHQLoader.CogHQLoader):
                 self.notify.info('QA-REGRESSION: COGHQ: Visit BossbotLobby')
             self.notify.debug('cogHQLobbyModelPath = %s' % self.cogHQLobbyModelPath)
             self.geom = loader.loadModel(self.cogHQLobbyModelPath)
+            self.extra = Actor("phase_12/models/bossbotHQ/ttr_m_bossbothq_sky")
+            self.extra.reparentTo(self.geom)
+            self.extra.setPos(0,0,0)
+            self.extra.setScale(2.0)
         else:
             self.notify.warning('loadPlaceGeom: unclassified zone %s' % zoneId)
         CogHQLoader.CogHQLoader.loadPlaceGeom(self, zoneId)
