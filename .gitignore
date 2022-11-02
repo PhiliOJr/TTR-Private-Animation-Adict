@@ -3,6 +3,7 @@
 *.fzn
 *.dll
 pandac/
+astron/databases/
 *.dis
 *.log
 screenshots/
