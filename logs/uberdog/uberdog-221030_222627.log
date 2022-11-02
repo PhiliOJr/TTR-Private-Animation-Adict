@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "C:\Panda3D-1.11.0-x64\python\lib\runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Panda3D-1.11.0-x64\python\lib\runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "C:\Toontown\TTR-Private-beta\toontown\uberdog\ServiceStartUD.py", line 47, in <module>
+    from toontown.uberdog.ToontownUberRepository import ToontownUberRepository
+  File "C:\Toontown\TTR-Private-beta\toontown\uberdog\ToontownUberRepository.py", line 7, in <module>
+    from .ToontownRPCHandler import *
+  File "C:\Toontown\TTR-Private-beta\toontown\uberdog\ToontownRPCHandler.py", line 1, in <module>
+    import pymongo
+ModuleNotFoundError: No module named 'pymongo'
+ServiceStartUD: Loading settings.
+TTLocalizer: Running in language: english
+from toontown.toonbase.TTLocalizerEnglish import *
+OTPLocalizer: Running in language: english
+from otp.otpbase.OTPLocalizerEnglish import *

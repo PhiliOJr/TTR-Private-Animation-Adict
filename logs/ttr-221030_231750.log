@@ -1,0 +1,40 @@
+ToontownStart: loading game settings
+ToontownStart: setting default font
+TTLocalizer: Running in language: english
+from toontown.toonbase.TTLocalizerEnglish import *
+OTPLocalizer: Running in language: english
+from otp.otpbase.OTPLocalizerEnglish import *
+ToontownStart: Loading default gui sounds
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:140: DeprecationWarning: This is deprecated. Use ConfigVariableString instead
+  serverVersion = config.GetString('server-version', 'no_version_set')
+ToontownStart: serverVersion:  ttrp-beta-v2.11.3
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:188: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if not launcher.isDummy() and not config.GetBool('auto-start-server', False):
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:212: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if config.GetBool('auto-start-server', False):
+{420000001: <toontown.distributed.ToontownDistrict.ToontownDistrict object at 0x0000028A4DBFCE20>}
+local
+fisherman origin:  render/scene/toontownCentral/fishing_pond_1/npc_fisherman_origin_0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+Battle Event localtoon-battle-event-3
+Battle Event localtoon-battle-event-9
+frame rate: 127.9 fps|0.003d|27 avs||310|311||0x0000|0x0000|0.0MB|0.0MB|32590.0MB|0|nt.2.10.0|3.600,3.600|0,0 cpus|OpenGL
+render/SellbotHQExterior.egg
+render/SellbotHQExterior.egg
+Battle Event localtoon-battle-event-15
+chooseFireOpenShot <function avatarCloseUpThrowShot at 0x0000028A4912E3A0>
+chooseFireOpenShot <function avatarCloseUpFireShot at 0x0000028A4912F0D0>
+chooseFireOpenShot <function avatarCloseUpThreeQuarterRightShot at 0x0000028A4912E430>
+chooseFireOpenShot <function allGroupLowShot at 0x0000028A4912DDC0>
+ignoring InputState-forward

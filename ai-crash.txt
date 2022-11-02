@@ -1,0 +1,57 @@
+Traceback (most recent call last):
+  File "C:\Toontown\TTR-Private-beta\toontown\ai\ServiceStartAI.py", line 58, in <module>
+    run()
+  File "C:\Toontown\TTR-Private-beta\otp\ai\AIBase.py", line 194, in run
+    self.taskMgr.run()
+  File "C:\Panda3D-1.11.0-x64\direct\task\Task.py", line 540, in run
+    self.step()
+  File "C:\Panda3D-1.11.0-x64\direct\task\Task.py", line 494, in step
+    self.mgr.poll()
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 612, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 617, in readerPollOnce
+    if self.checkDatagram():
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\DistributedObjectAI.py", line 546, in setBarrierReady
+    barrier.clear(avId)
+  File "C:\Toontown\TTR-Private-beta\otp\ai\Barrier.py", line 57, in clear
+    self.doneFunc(self.avIdList)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\PythonUtil.py", line 82, in _do__call__
+    return self._function(*(self._args + args), **_kargs)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\DistributedObjectAI.py", line 555, in __barrierCallback
+    callback(avIds)
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedBossCogAI.py", line 231, in __doneElevator
+    self.b_setState('Introduction')
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedBossCogAI.py", line 178, in b_setState
+    self.setState(state)
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedBossCogAI.py", line 185, in setState
+    self.demand(state)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\FSM.py", line 322, in demand
+    result = self.request(request, *args)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\FSM.py", line 372, in request
+    return self.__setState(*result)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\FSM.py", line 519, in __setState
+    coro.send(None)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\FSM.py", line 545, in __transition
+    result = self.__callEnterFunc(self.newState, *args)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\FSM.py", line 582, in __callEnterFunc
+    return func(*args)
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedSellbotBossAI.py", line 212, in enterIntroduction
+    DistributedBossCogAI.DistributedBossCogAI.enterIntroduction(self)
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedBossCogAI.py", line 239, in enterIntroduction
+    self.makeBattleOneBattles()
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedSellbotBossAI.py", line 188, in makeBattleOneBattles
+    self.initializeBattles(1, ToontownGlobals.SellbotBossBattleOnePosHpr)
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedBossCogAI.py", line 417, in initializeBattles
+    suitHandles = self.generateSuits(battleNumber)
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedSellbotBossAI.py", line 192, in generateSuits
+    return self.generatePlannerSuits(30, 1, 12)
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedBossCogAI.py", line 380, in generatePlannerSuits
+    suit = self.__genSuitObject(self.zoneId, suitType, self.dna.dept, suitLevel, 0)
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedBossCogAI.py", line 395, in __genSuitObject
+    skel = self.__setupSuitInfo(newSuit, bldgTrack, suitLevel, suitType)
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedBossCogAI.py", line 408, in __setupSuitInfo
+    suit.setLevel(suitLevel)
+  File "C:\Toontown\TTR-Private-beta\toontown\suit\DistributedSuitBaseAI.py", line 53, in setLevel
+    hp = attributes['hp'][self.level]
+IndexError: tuple index out of range
+

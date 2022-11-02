@@ -1,0 +1,38 @@
+ToontownStart: loading game settings
+ToontownStart: setting default font
+TTLocalizer: Running in language: english
+from toontown.toonbase.TTLocalizerEnglish import *
+OTPLocalizer: Running in language: english
+from otp.otpbase.OTPLocalizerEnglish import *
+ToontownStart: Loading default gui sounds
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:140: DeprecationWarning: This is deprecated. Use ConfigVariableString instead
+  serverVersion = config.GetString('server-version', 'no_version_set')
+ToontownStart: serverVersion:  ttrp-beta-v2.11.3
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:188: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if not launcher.isDummy() and not config.GetBool('auto-start-server', False):
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:212: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if config.GetBool('auto-start-server', False):
+{420000001: <toontown.distributed.ToontownDistrict.ToontownDistrict object at 0x000002B218F23820>}
+NameShop: Couldn't find von
+NameShop : Some part of last name not found, uh oh!
+[1, 1, 1, 'Mr.', 'Swinkle', 'lol', 'lol', 'Mr. Swinkle lollol']
+local
+fisherman origin:  render/scene/toontownCentral/fishing_pond_1/npc_fisherman_origin_0
+local
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+OnscreenText.configure: mayChange == 0
+Battle Event localtoon-battle-event-3
+render/SellbotHQExterior.egg
+frame rate: 138.9 fps|0.009d|33 avs||334|334||0x0000|0x0000|0.0MB|0.0MB|32590.0MB|0|nt.2.10.0|3.600,3.600|0,0 cpus|OpenGL
+Battle Event localtoon-battle-event-16
+chooseFireOpenShot <function avatarBehindShot at 0x000002B21445E700>
+chooseFireOpenShot <function allGroupLowShot at 0x000002B21445DDC0>
+chooseFireOpenShot <function allGroupLowShot at 0x000002B21445DDC0>
+chooseFireOpenShot <function allGroupLowShot at 0x000002B21445DDC0>
+ignoring InputState-forward

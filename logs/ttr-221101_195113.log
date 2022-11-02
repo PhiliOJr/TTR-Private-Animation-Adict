@@ -1,0 +1,18 @@
+ToontownStart: loading game settings
+ToontownStart: setting default font
+TTLocalizer: Running in language: english
+from toontown.toonbase.TTLocalizerEnglish import *
+OTPLocalizer: Running in language: english
+from otp.otpbase.OTPLocalizerEnglish import *
+ToontownStart: Loading default gui sounds
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:140: DeprecationWarning: This is deprecated. Use ConfigVariableString instead
+  serverVersion = config.GetString('server-version', 'no_version_set')
+ToontownStart: serverVersion:  ttrp-beta-v2.11.3
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:188: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if not launcher.isDummy() and not config.GetBool('auto-start-server', False):
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:212: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if config.GetBool('auto-start-server', False):
+{420000001: <toontown.distributed.ToontownDistrict.ToontownDistrict object at 0x0000025CD3190D30>}
+local
+Battle Event localtoon-battle-event-3
+ignoring InputState-forward

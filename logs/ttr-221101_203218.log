@@ -1,0 +1,114 @@
+ToontownStart: loading game settings
+ToontownStart: setting default font
+TTLocalizer: Running in language: english
+from toontown.toonbase.TTLocalizerEnglish import *
+OTPLocalizer: Running in language: english
+from otp.otpbase.OTPLocalizerEnglish import *
+ToontownStart: Loading default gui sounds
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:140: DeprecationWarning: This is deprecated. Use ConfigVariableString instead
+  serverVersion = config.GetString('server-version', 'no_version_set')
+ToontownStart: serverVersion:  ttrp-beta-v2.11.3
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:188: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if not launcher.isDummy() and not config.GetBool('auto-start-server', False):
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:212: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if config.GetBool('auto-start-server', False):
+{420000001: <toontown.distributed.ToontownDistrict.ToontownDistrict object at 0x0000021A20EEFCD0>}
+local
+Battle Event localtoon-battle-event-3
+Traceback (most recent call last):
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1559, in handlePlayGame
+    self.handleUpdateField(di)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ClientRepositoryBase.py", line 439, in handleUpdateField
+    self.__doUpdate(doId, di, ovUpdated)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ClientRepositoryBase.py", line 447, in __doUpdate
+    do.dclass.receiveUpdate(do, di)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattleBase.py", line 345, in setState
+    self.fsm.request(state, [globalClockDelta.localElapsedTime(timestamp)])
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 281, in request
+    self.__transition(aState,
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 230, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattleBase.py", line 1056, in enterWaitForInput
+    self.__adjustTownBattle()
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattleBase.py", line 1389, in __adjustTownBattle
+    self.townBattle.adjustCogsAndToons(self.activeSuits, luredSuits, trappedSuits, self.activeToons)
+  File "C:\Toontown\TTR-Private-beta\toontown\town\TownBattle.py", line 502, in adjustCogsAndToons
+    self.cogPanels[i].setCogInformation(cogs[i])
+  File "C:\Toontown\TTR-Private-beta\toontown\town\TownBattleCogPanel.py", line 92, in setCogInformation
+    self.head.reparentTo(self.gui.find('**/loc_cogHead'))
+AssertionError: !is_empty() at line 315 of panda/src/pgraph/nodePath.cxx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 612, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 619, in readerPollOnce
+    self.handleDatagram(self.private__di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1959, in handleDatagram
+    self.handler(msgType, di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1561, in handlePlayGame
+    self.notify.warning('AssertionError: %s' % e.message)
+AttributeError: 'AssertionError' object has no attribute 'message'
+Traceback (most recent call last):
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1559, in handlePlayGame
+    self.handleUpdateField(di)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ClientRepositoryBase.py", line 439, in handleUpdateField
+    self.__doUpdate(doId, di, ovUpdated)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ClientRepositoryBase.py", line 447, in __doUpdate
+    do.dclass.receiveUpdate(do, di)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattleBase.py", line 345, in setState
+    self.fsm.request(state, [globalClockDelta.localElapsedTime(timestamp)])
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 281, in request
+    self.__transition(aState,
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 230, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattleBase.py", line 1056, in enterWaitForInput
+    self.__adjustTownBattle()
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattleBase.py", line 1389, in __adjustTownBattle
+    self.townBattle.adjustCogsAndToons(self.activeSuits, luredSuits, trappedSuits, self.activeToons)
+  File "C:\Toontown\TTR-Private-beta\toontown\town\TownBattle.py", line 502, in adjustCogsAndToons
+    self.cogPanels[i].setCogInformation(cogs[i])
+  File "C:\Toontown\TTR-Private-beta\toontown\town\TownBattleCogPanel.py", line 92, in setCogInformation
+    self.head.reparentTo(self.gui.find('**/loc_cogHead'))
+AssertionError: !is_empty() at line 315 of panda/src/pgraph/nodePath.cxx
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Toontown\TTR-Private-beta\otp\otpbase\OTPBase.py", line 238, in run
+    taskMgr.run()
+  File "C:\Panda3D-1.11.0-x64\direct\task\Task.py", line 540, in run
+    self.step()
+  File "C:\Panda3D-1.11.0-x64\direct\task\Task.py", line 494, in step
+    self.mgr.poll()
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 612, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 619, in readerPollOnce
+    self.handleDatagram(self.private__di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1959, in handleDatagram
+    self.handler(msgType, di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1561, in handlePlayGame
+    self.notify.warning('AssertionError: %s' % e.message)
+AttributeError: 'AssertionError' object has no attribute 'message'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py", line 252, in <module>
+    base.run()
+  File "C:\Toontown\TTR-Private-beta\otp\otpbase\OTPBase.py", line 249, in run
+    self.cr.timeManager.setExceptionInfo()
+  File "C:\Toontown\TTR-Private-beta\otp\ai\TimeManager.py", line 160, in setExceptionInfo
+    self.sendUpdate('setExceptionInfo', [info])
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\DistributedObject.py", line 359, in sendUpdate
+    dg = self.dclass.clientFormatUpdate(
+ValueError: Value out of range on field: setExceptionInfo['Traceback (most recent call last):\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 1559, in handlePlayGame\n    self.handleUpdateField(di)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\ClientRepositoryBase.py", line 439, in handleUpdateField\n    self.__doUpdate(doId, di, ovUpdated)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\ClientRepositoryBase.py", line 447, in __doUpdate\n    do.dclass.receiveUpdate(do, di)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\battle\\DistributedBattleBase.py", line 345, in setState\n    self.fsm.request(state, [globalClockDelta.localElapsedTime(timestamp)])\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 281, in request\n    self.__transition(aState,\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 230, in __transition\n    self.__enter(aState, enterArgList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 216, in __enter\n    aState.enter(argList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\State.py", line 200, in enter\n    self.__enterFunc(*argList)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\battle\\DistributedBattleBase.py", line 1056, in enterWaitForInput\n    self.__adjustTownBattle()\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\battle\\DistributedBattleBase.py", line 1389, in __adjustTownBattle\n    self.townBattle.adjustCogsAndToons(self.activeSuits, luredSuits, trappedSuits, self.activeToons)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\town\\TownBattle.py", line 502, in adjustCogsAndToons\n    self.cogPanels[i].setCogInformation(cogs[i])\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\town\\TownBattleCogPanel.py", line 92, in setCogInformation\n    self.head.reparentTo(self.gui.find(\'**/loc_cogHead\'))\nAssertionError: !is_empty() at line 315 of panda/src/pgraph/nodePath.cxx\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\otpbase\\OTPBase.py", line 238, in run\n    taskMgr.run()\n  File "C:\\Panda3D-1.11.0-x64\\direct\\task\\Task.py", line 540, in run\n    self.step()\n  File "C:\\Panda3D-1.11.0-x64\\direct\\task\\Task.py", line 494, in step\n    self.mgr.poll()\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\ConnectionRepository.py", line 612, in readerPollUntilEmpty\n    while self.readerPollOnce():\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\ConnectionRepository.py", line 619, in readerPollOnce\n    self.handleDatagram(self.private__di)\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 1959, in handleDatagram\n    self.handler(msgType, di)\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 1561, in handlePlayGame\n    self.notify.warning(\'AssertionError: %s\' % e.message)\nAttributeError: \'AssertionError\' object has no attribute \'message\'\n']

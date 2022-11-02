@@ -1,0 +1,60 @@
+ToontownStart: loading game settings
+ToontownStart: setting default font
+TTLocalizer: Running in language: english
+from toontown.toonbase.TTLocalizerEnglish import *
+OTPLocalizer: Running in language: english
+from otp.otpbase.OTPLocalizerEnglish import *
+ToontownStart: Loading default gui sounds
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:140: DeprecationWarning: This is deprecated. Use ConfigVariableString instead
+  serverVersion = config.GetString('server-version', 'no_version_set')
+ToontownStart: serverVersion:  ttrp-beta-v2.11.3
+C:\Toontown\TTR-Private-beta\otp\speedchat\SCTerminal.py:78: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if nCharges is 0:
+C:\Toontown\TTR-Private-beta\otp\speedchat\SCTerminal.py:165: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if self.getCharges() is not -1:
+C:\Toontown\TTR-Private-beta\toontown\toon\ToonHead.py:448: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if headStyle is 'l':
+C:\Toontown\TTR-Private-beta\toontown\toon\ToonHead.py:483: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if headStyle is 'l':
+C:\Toontown\TTR-Private-beta\toontown\estate\Estate.py:253: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if self.nextState is not 'petTutorial':
+C:\Toontown\TTR-Private-beta\toontown\battle\RewardPanel.py:766: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if endTracks[i] is 1:
+C:\Toontown\TTR-Private-beta\otp\level\Level.py:108: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if entity is 'nonlocal':
+C:\Toontown\TTR-Private-beta\otp\level\Level.py:110: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif entity is 'nothing':
+C:\Toontown\TTR-Private-beta\otp\level\ModelEntity.py:52: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if self.goonHatType is not 'none':
+C:\Toontown\TTR-Private-beta\toontown\safezone\Train.py:113: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if trainShouldStop is 0:
+C:\Toontown\TTR-Private-beta\toontown\fishing\BingoCardGui.py:274: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(unmarkedMatches) is 0:
+C:\Toontown\TTR-Private-beta\toontown\fishing\BingoCardGui.py:432: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if self.gameType['text'] is not '':
+C:\Toontown\TTR-Private-beta\toontown\minigame\DistributedDivingGame.py:179: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if self.dead is 1:
+C:\Toontown\TTR-Private-beta\toontown\minigame\DistributedDivingGame.py:418: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if i % 2 is 0:
+C:\Toontown\TTR-Private-beta\toontown\minigame\DistributedDivingGame.py:737: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if fish.name is 'bear' or fish.name is 'nurse':
+C:\Toontown\TTR-Private-beta\toontown\minigame\DistributedDivingGame.py:737: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if fish.name is 'bear' or fish.name is 'nurse':
+C:\Toontown\TTR-Private-beta\toontown\minigame\DivingFishSpawn.py:29: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if fishcode is 0:
+C:\Toontown\TTR-Private-beta\toontown\minigame\DivingFishSpawn.py:33: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif fishcode is 1:
+C:\Toontown\TTR-Private-beta\toontown\minigame\DivingFishSpawn.py:37: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif fishcode is 2:
+C:\Toontown\TTR-Private-beta\toontown\minigame\DivingFishSpawn.py:41: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif fishcode is 3:
+C:\Toontown\TTR-Private-beta\toontown\minigame\DivingFishSpawn.py:45: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif fishcode is 4:
+C:\Toontown\TTR-Private-beta\toontown\minigame\DivingFishSpawn.py:49: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  elif fishcode is 5:
+C:\Toontown\TTR-Private-beta\toontown\minigame\DivingFishSpawn.py:95: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if self.direction is -1:
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:188: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if not launcher.isDummy() and not config.GetBool('auto-start-server', False):
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:212: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if config.GetBool('auto-start-server', False):

@@ -1,0 +1,31 @@
+ToontownStart: loading game settings
+ToontownStart: setting default font
+TTLocalizer: Running in language: english
+from toontown.toonbase.TTLocalizerEnglish import *
+OTPLocalizer: Running in language: english
+from otp.otpbase.OTPLocalizerEnglish import *
+ToontownStart: Loading default gui sounds
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:140: DeprecationWarning: This is deprecated. Use ConfigVariableString instead
+  serverVersion = config.GetString('server-version', 'no_version_set')
+ToontownStart: serverVersion:  ttrp-beta-v2.11.3
+Traceback (most recent call last):
+  File "C:\Panda3D-1.11.0-x64\python\lib\runpy.py", line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Panda3D-1.11.0-x64\python\lib\runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py", line 144, in <module>
+    from toontown.distributed import ToontownClientRepository
+  File "C:\Toontown\TTR-Private-beta\toontown\distributed\ToontownClientRepository.py", line 36, in <module>
+    from toontown.friends import FriendsListPanel
+  File "C:\Toontown\TTR-Private-beta\toontown\friends\FriendsListPanel.py", line 5, in <module>
+    from toontown.toon import ToonAvatarPanel
+  File "C:\Toontown\TTR-Private-beta\toontown\toon\ToonAvatarPanel.py", line 14, in <module>
+    from . import ToonAvatarDetailPanel
+  File "C:\Toontown\TTR-Private-beta\toontown\toon\ToonAvatarDetailPanel.py", line 9, in <module>
+    from . import DistributedToon
+  File "C:\Toontown\TTR-Private-beta\toontown\toon\DistributedToon.py", line 32, in <module>
+    from . import InventoryNew
+  File "C:\Toontown\TTR-Private-beta\toontown\toon\InventoryNew.py", line 1262
+    self.battleFrame = DirectFrame(relief=None, image=battleModels.find('**/ttr_t_gui_bat_battleMenu_base_card'), image_scale=0.25,
+                                                                            ^
+SyntaxError: keyword argument repeated: image_scale

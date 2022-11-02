@@ -1,0 +1,159 @@
+ToontownStart: loading game settings
+ToontownStart: setting default font
+TTLocalizer: Running in language: english
+from toontown.toonbase.TTLocalizerEnglish import *
+OTPLocalizer: Running in language: english
+from otp.otpbase.OTPLocalizerEnglish import *
+ToontownStart: Loading default gui sounds
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:140: DeprecationWarning: This is deprecated. Use ConfigVariableString instead
+  serverVersion = config.GetString('server-version', 'no_version_set')
+ToontownStart: serverVersion:  ttrp-beta-v2.11.3
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:188: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if not launcher.isDummy() and not config.GetBool('auto-start-server', False):
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:212: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if config.GetBool('auto-start-server', False):
+{420000001: <toontown.distributed.ToontownDistrict.ToontownDistrict object at 0x000001CEA762AB20>}
+local
+Traceback (most recent call last):
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 612, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 619, in readerPollOnce
+    self.handleDatagram(self.private__di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1959, in handleDatagram
+    self.handler(msgType, di)
+  File "C:\Toontown\TTR-Private-beta\toontown\hood\QuietZoneState.py", line 156, in handleWaitForQuietZoneResponse
+    base.cr.handlePlayGame(msgType, di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1565, in handlePlayGame
+    self.handleMessageType(msgType, di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1853, in handleMessageType
+    self.gotInterestDoneMessage(di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1881, in gotInterestDoneMessage
+    self.handleInterestDoneMessage(di)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\DoInterestManager.py", line 618, in handleInterestDoneMessage
+    messenger.send(event)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 335, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 420, in __dispatch
+    result = method (*(extraArgs + sentArgs))
+  File "C:\Toontown\TTR-Private-beta\toontown\distributed\ToontownClientRepository.py", line 1027, in _handleEmuSetZoneDone
+    messenger.send(event)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 335, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 420, in __dispatch
+    result = method (*(extraArgs + sentArgs))
+  File "C:\Toontown\TTR-Private-beta\toontown\hood\QuietZoneState.py", line 199, in _handleQuietZoneComplete
+    self.fsm.request('waitForZoneRedirect')
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 281, in request
+    self.__transition(aState,
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 230, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\hood\QuietZoneState.py", line 240, in enterWaitForZoneRedirect
+    self.fsm.request('waitForSetZoneResponse')
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 281, in request
+    self.__transition(aState,
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 230, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\hood\QuietZoneState.py", line 259, in enterWaitForSetZoneResponse
+    messenger.send(self.getEnterWaitForSetZoneResponseMsg(), [self._requestStatus])
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 335, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 420, in __dispatch
+    result = method (*(extraArgs + sentArgs))
+  File "C:\Toontown\TTR-Private-beta\toontown\distributed\PlayGame.py", line 295, in handleWaitForSetZoneResponse
+    self.hood.loadLoader(requestStatus)
+  File "C:\Toontown\TTR-Private-beta\toontown\hood\CogHood.py", line 40, in loadLoader
+    self.loader.load(requestStatus['zoneId'])
+  File "C:\Toontown\TTR-Private-beta\toontown\coghq\SellbotCogHQLoader.py", line 39, in load
+    CogHQLoader.CogHQLoader.load(self, zoneId)
+  File "C:\Toontown\TTR-Private-beta\toontown\coghq\CogHQLoader.py", line 33, in load
+    self.townBattle = TownBattle.TownBattle(self.townBattleDoneEvent)
+AttributeError: module 'toontown.town.TownBattle' has no attribute 'TownBattle'
+Traceback (most recent call last):
+  File "C:\Toontown\TTR-Private-beta\otp\otpbase\OTPBase.py", line 238, in run
+    taskMgr.run()
+  File "C:\Panda3D-1.11.0-x64\direct\task\Task.py", line 540, in run
+    self.step()
+  File "C:\Panda3D-1.11.0-x64\direct\task\Task.py", line 494, in step
+    self.mgr.poll()
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 612, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 619, in readerPollOnce
+    self.handleDatagram(self.private__di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1959, in handleDatagram
+    self.handler(msgType, di)
+  File "C:\Toontown\TTR-Private-beta\toontown\hood\QuietZoneState.py", line 156, in handleWaitForQuietZoneResponse
+    base.cr.handlePlayGame(msgType, di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1565, in handlePlayGame
+    self.handleMessageType(msgType, di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1853, in handleMessageType
+    self.gotInterestDoneMessage(di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1881, in gotInterestDoneMessage
+    self.handleInterestDoneMessage(di)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\DoInterestManager.py", line 618, in handleInterestDoneMessage
+    messenger.send(event)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 335, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 420, in __dispatch
+    result = method (*(extraArgs + sentArgs))
+  File "C:\Toontown\TTR-Private-beta\toontown\distributed\ToontownClientRepository.py", line 1027, in _handleEmuSetZoneDone
+    messenger.send(event)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 335, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 420, in __dispatch
+    result = method (*(extraArgs + sentArgs))
+  File "C:\Toontown\TTR-Private-beta\toontown\hood\QuietZoneState.py", line 199, in _handleQuietZoneComplete
+    self.fsm.request('waitForZoneRedirect')
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 281, in request
+    self.__transition(aState,
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 230, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\hood\QuietZoneState.py", line 240, in enterWaitForZoneRedirect
+    self.fsm.request('waitForSetZoneResponse')
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 281, in request
+    self.__transition(aState,
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 230, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\hood\QuietZoneState.py", line 259, in enterWaitForSetZoneResponse
+    messenger.send(self.getEnterWaitForSetZoneResponseMsg(), [self._requestStatus])
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 335, in send
+    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)
+  File "C:\Panda3D-1.11.0-x64\direct\showbase\Messenger.py", line 420, in __dispatch
+    result = method (*(extraArgs + sentArgs))
+  File "C:\Toontown\TTR-Private-beta\toontown\distributed\PlayGame.py", line 295, in handleWaitForSetZoneResponse
+    self.hood.loadLoader(requestStatus)
+  File "C:\Toontown\TTR-Private-beta\toontown\hood\CogHood.py", line 40, in loadLoader
+    self.loader.load(requestStatus['zoneId'])
+  File "C:\Toontown\TTR-Private-beta\toontown\coghq\SellbotCogHQLoader.py", line 39, in load
+    CogHQLoader.CogHQLoader.load(self, zoneId)
+  File "C:\Toontown\TTR-Private-beta\toontown\coghq\CogHQLoader.py", line 33, in load
+    self.townBattle = TownBattle.TownBattle(self.townBattleDoneEvent)
+AttributeError: module 'toontown.town.TownBattle' has no attribute 'TownBattle'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py", line 252, in <module>
+    base.run()
+  File "C:\Toontown\TTR-Private-beta\otp\otpbase\OTPBase.py", line 249, in run
+    self.cr.timeManager.setExceptionInfo()
+  File "C:\Toontown\TTR-Private-beta\otp\ai\TimeManager.py", line 160, in setExceptionInfo
+    self.sendUpdate('setExceptionInfo', [info])
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\DistributedObject.py", line 359, in sendUpdate
+    dg = self.dclass.clientFormatUpdate(
+ValueError: Value out of range on field: setExceptionInfo['Traceback (most recent call last):\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\otpbase\\OTPBase.py", line 238, in run\n    taskMgr.run()\n  File "C:\\Panda3D-1.11.0-x64\\direct\\task\\Task.py", line 540, in run\n    self.step()\n  File "C:\\Panda3D-1.11.0-x64\\direct\\task\\Task.py", line 494, in step\n    self.mgr.poll()\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\ConnectionRepository.py", line 612, in readerPollUntilEmpty\n    while self.readerPollOnce():\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\ConnectionRepository.py", line 619, in readerPollOnce\n    self.handleDatagram(self.private__di)\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 1959, in handleDatagram\n    self.handler(msgType, di)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\hood\\QuietZoneState.py", line 156, in handleWaitForQuietZoneResponse\n    base.cr.handlePlayGame(msgType, di)\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 1565, in handlePlayGame\n    self.handleMessageType(msgType, di)\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 1853, in handleMessageType\n    self.gotInterestDoneMessage(di)\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 1881, in gotInterestDoneMessage\n    self.handleInterestDoneMessage(di)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\DoInterestManager.py", line 618, in handleInterestDoneMessage\n    messenger.send(event)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\showbase\\Messenger.py", line 335, in send\n    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\showbase\\Messenger.py", line 420, in __dispatch\n    result = method (*(extraArgs + sentArgs))\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\distributed\\ToontownClientRepository.py", line 1027, in _handleEmuSetZoneDone\n    messenger.send(event)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\showbase\\Messenger.py", line 335, in send\n    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\showbase\\Messenger.py", line 420, in __dispatch\n    result = method (*(extraArgs + sentArgs))\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\hood\\QuietZoneState.py", line 199, in _handleQuietZoneComplete\n    self.fsm.request(\'waitForZoneRedirect\')\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 281, in request\n    self.__transition(aState,\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 230, in __transition\n    self.__enter(aState, enterArgList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 216, in __enter\n    aState.enter(argList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\State.py", line 200, in enter\n    self.__enterFunc(*argList)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\hood\\QuietZoneState.py", line 240, in enterWaitForZoneRedirect\n    self.fsm.request(\'waitForSetZoneResponse\')\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 281, in request\n    self.__transition(aState,\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 230, in __transition\n    self.__enter(aState, enterArgList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 216, in __enter\n    aState.enter(argList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\State.py", line 200, in enter\n    self.__enterFunc(*argList)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\hood\\QuietZoneState.py", line 259, in enterWaitForSetZoneResponse\n    messenger.send(self.getEnterWaitForSetZoneResponseMsg(), [self._requestStatus])\n  File "C:\\Panda3D-1.11.0-x64\\direct\\showbase\\Messenger.py", line 335, in send\n    self.__dispatch(acceptorDict, event, sentArgs, foundWatch)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\showbase\\Messenger.py", line 420, in __dispatch\n    result = method (*(extraArgs + sentArgs))\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\distributed\\PlayGame.py", line 295, in handleWaitForSetZoneResponse\n    self.hood.loadLoader(requestStatus)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\hood\\CogHood.py", line 40, in loadLoader\n    self.loader.load(requestStatus[\'zoneId\'])\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\coghq\\SellbotCogHQLoader.py", line 39, in load\n    CogHQLoader.CogHQLoader.load(self, zoneId)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\coghq\\CogHQLoader.py", line 33, in load\n    self.townBattle = TownBattle.TownBattle(self.townBattleDoneEvent)\nAttributeError: module \'toontown.town.TownBattle\' has no attribute \'TownBattle\'\n']

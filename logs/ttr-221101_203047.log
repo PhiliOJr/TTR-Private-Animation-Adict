@@ -1,0 +1,152 @@
+ToontownStart: loading game settings
+ToontownStart: setting default font
+TTLocalizer: Running in language: english
+from toontown.toonbase.TTLocalizerEnglish import *
+OTPLocalizer: Running in language: english
+from otp.otpbase.OTPLocalizerEnglish import *
+ToontownStart: Loading default gui sounds
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:140: DeprecationWarning: This is deprecated. Use ConfigVariableString instead
+  serverVersion = config.GetString('server-version', 'no_version_set')
+ToontownStart: serverVersion:  ttrp-beta-v2.11.3
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:188: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if not launcher.isDummy() and not config.GetBool('auto-start-server', False):
+C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py:212: DeprecationWarning: This is deprecated. Use ConfigVariableBool instead
+  if config.GetBool('auto-start-server', False):
+{420000001: <toontown.distributed.ToontownDistrict.ToontownDistrict object at 0x00000213F7EBFCD0>}
+local
+Battle Event localtoon-battle-event-3
+Traceback (most recent call last):
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 612, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 619, in readerPollOnce
+    self.handleDatagram(self.private__di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1959, in handleDatagram
+    self.handler(msgType, di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1553, in handlePlayGame
+    self.handleGenerateWithRequired(di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 2044, in handleGenerateWithRequired
+    return self.__doGenerate(doId, parentId, zoneId, classId, di, other)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 2110, in __doGenerate
+    distObj = self.generateWithRequiredFields(dclass, doId, di, parentId, zoneId)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ClientRepositoryBase.py", line 266, in generateWithRequiredFields
+    distObj.updateRequiredFields(dclass, di)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\DistributedObject.py", line 337, in updateRequiredFields
+    dclass.receiveUpdateBroadcastRequired(self, di)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattle.py", line 67, in setMembers
+    oldtoons = DistributedBattleBase.DistributedBattleBase.setMembers(self, suits, suitsJoining, suitsPending, suitsActive, suitsLured, suitTraps, toons, toonsJoining, toonsPending, toonsActive, toonsRunning, timestamp)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattleBase.py", line 528, in setMembers
+    self.localToonFsm.request('HasLocalToon')
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 281, in request
+    self.__transition(aState,
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 230, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattleBase.py", line 1239, in enterHasLocalToon
+    base.cr.playGame.getPlace().setState('battle', self.localToonBattleEvent)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\BattlePlace.py", line 16, in setState
+    if not self.fsm.request(state, [battleEvent]):
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 281, in request
+    self.__transition(aState,
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 230, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\BattlePlace.py", line 40, in enterBattle
+    self.enterTownBattle(event)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\BattlePlace.py", line 47, in enterTownBattle
+    self.loader.townBattle.enter(event, self.fsm.getStateNamed('battle'))
+  File "C:\Toontown\TTR-Private-beta\toontown\town\TownBattle.py", line 177, in enter
+    self.fsm.enterInitialState()
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 113, in enterInitialState
+    self.__enter(self.__initialState, argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\town\TownBattle.py", line 347, in enterOff
+    cogPanel.hide()
+  File "C:\Toontown\TTR-Private-beta\toontown\town\TownBattleCogPanel.py", line 163, in hide
+    self.button.hide()
+AssertionError: !is_empty() at line 1854 of D:\Repos\GitHub\open-toontown\panda3d\built_x64\include\nodePath.I
+Traceback (most recent call last):
+  File "C:\Toontown\TTR-Private-beta\otp\otpbase\OTPBase.py", line 238, in run
+    taskMgr.run()
+  File "C:\Panda3D-1.11.0-x64\direct\task\Task.py", line 540, in run
+    self.step()
+  File "C:\Panda3D-1.11.0-x64\direct\task\Task.py", line 494, in step
+    self.mgr.poll()
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 612, in readerPollUntilEmpty
+    while self.readerPollOnce():
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 619, in readerPollOnce
+    self.handleDatagram(self.private__di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1959, in handleDatagram
+    self.handler(msgType, di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 1553, in handlePlayGame
+    self.handleGenerateWithRequired(di)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 2044, in handleGenerateWithRequired
+    return self.__doGenerate(doId, parentId, zoneId, classId, di, other)
+  File "C:\Toontown\TTR-Private-beta\otp\distributed\OTPClientRepository.py", line 2110, in __doGenerate
+    distObj = self.generateWithRequiredFields(dclass, doId, di, parentId, zoneId)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ClientRepositoryBase.py", line 266, in generateWithRequiredFields
+    distObj.updateRequiredFields(dclass, di)
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\DistributedObject.py", line 337, in updateRequiredFields
+    dclass.receiveUpdateBroadcastRequired(self, di)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattle.py", line 67, in setMembers
+    oldtoons = DistributedBattleBase.DistributedBattleBase.setMembers(self, suits, suitsJoining, suitsPending, suitsActive, suitsLured, suitTraps, toons, toonsJoining, toonsPending, toonsActive, toonsRunning, timestamp)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattleBase.py", line 528, in setMembers
+    self.localToonFsm.request('HasLocalToon')
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 281, in request
+    self.__transition(aState,
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 230, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\DistributedBattleBase.py", line 1239, in enterHasLocalToon
+    base.cr.playGame.getPlace().setState('battle', self.localToonBattleEvent)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\BattlePlace.py", line 16, in setState
+    if not self.fsm.request(state, [battleEvent]):
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 281, in request
+    self.__transition(aState,
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 230, in __transition
+    self.__enter(aState, enterArgList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\BattlePlace.py", line 40, in enterBattle
+    self.enterTownBattle(event)
+  File "C:\Toontown\TTR-Private-beta\toontown\battle\BattlePlace.py", line 47, in enterTownBattle
+    self.loader.townBattle.enter(event, self.fsm.getStateNamed('battle'))
+  File "C:\Toontown\TTR-Private-beta\toontown\town\TownBattle.py", line 177, in enter
+    self.fsm.enterInitialState()
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 113, in enterInitialState
+    self.__enter(self.__initialState, argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\ClassicFSM.py", line 216, in __enter
+    aState.enter(argList)
+  File "C:\Panda3D-1.11.0-x64\direct\fsm\State.py", line 200, in enter
+    self.__enterFunc(*argList)
+  File "C:\Toontown\TTR-Private-beta\toontown\town\TownBattle.py", line 347, in enterOff
+    cogPanel.hide()
+  File "C:\Toontown\TTR-Private-beta\toontown\town\TownBattleCogPanel.py", line 163, in hide
+    self.button.hide()
+AssertionError: !is_empty() at line 1854 of D:\Repos\GitHub\open-toontown\panda3d\built_x64\include\nodePath.I
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Toontown\TTR-Private-beta\toontown\toonbase\ToontownStart.py", line 252, in <module>
+    base.run()
+  File "C:\Toontown\TTR-Private-beta\otp\otpbase\OTPBase.py", line 249, in run
+    self.cr.timeManager.setExceptionInfo()
+  File "C:\Toontown\TTR-Private-beta\otp\ai\TimeManager.py", line 160, in setExceptionInfo
+    self.sendUpdate('setExceptionInfo', [info])
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\DistributedObject.py", line 359, in sendUpdate
+    dg = self.dclass.clientFormatUpdate(
+ValueError: Value out of range on field: setExceptionInfo['Traceback (most recent call last):\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\otpbase\\OTPBase.py", line 238, in run\n    taskMgr.run()\n  File "C:\\Panda3D-1.11.0-x64\\direct\\task\\Task.py", line 540, in run\n    self.step()\n  File "C:\\Panda3D-1.11.0-x64\\direct\\task\\Task.py", line 494, in step\n    self.mgr.poll()\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\ConnectionRepository.py", line 612, in readerPollUntilEmpty\n    while self.readerPollOnce():\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\ConnectionRepository.py", line 619, in readerPollOnce\n    self.handleDatagram(self.private__di)\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 1959, in handleDatagram\n    self.handler(msgType, di)\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 1553, in handlePlayGame\n    self.handleGenerateWithRequired(di)\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 2044, in handleGenerateWithRequired\n    return self.__doGenerate(doId, parentId, zoneId, classId, di, other)\n  File "C:\\Toontown\\TTR-Private-beta\\otp\\distributed\\OTPClientRepository.py", line 2110, in __doGenerate\n    distObj = self.generateWithRequiredFields(dclass, doId, di, parentId, zoneId)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\ClientRepositoryBase.py", line 266, in generateWithRequiredFields\n    distObj.updateRequiredFields(dclass, di)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\distributed\\DistributedObject.py", line 337, in updateRequiredFields\n    dclass.receiveUpdateBroadcastRequired(self, di)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\battle\\DistributedBattle.py", line 67, in setMembers\n    oldtoons = DistributedBattleBase.DistributedBattleBase.setMembers(self, suits, suitsJoining, suitsPending, suitsActive, suitsLured, suitTraps, toons, toonsJoining, toonsPending, toonsActive, toonsRunning, timestamp)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\battle\\DistributedBattleBase.py", line 528, in setMembers\n    self.localToonFsm.request(\'HasLocalToon\')\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 281, in request\n    self.__transition(aState,\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 230, in __transition\n    self.__enter(aState, enterArgList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 216, in __enter\n    aState.enter(argList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\State.py", line 200, in enter\n    self.__enterFunc(*argList)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\battle\\DistributedBattleBase.py", line 1239, in enterHasLocalToon\n    base.cr.playGame.getPlace().setState(\'battle\', self.localToonBattleEvent)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\battle\\BattlePlace.py", line 16, in setState\n    if not self.fsm.request(state, [battleEvent]):\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 281, in request\n    self.__transition(aState,\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 230, in __transition\n    self.__enter(aState, enterArgList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 216, in __enter\n    aState.enter(argList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\State.py", line 200, in enter\n    self.__enterFunc(*argList)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\battle\\BattlePlace.py", line 40, in enterBattle\n    self.enterTownBattle(event)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\battle\\BattlePlace.py", line 47, in enterTownBattle\n    self.loader.townBattle.enter(event, self.fsm.getStateNamed(\'battle\'))\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\town\\TownBattle.py", line 177, in enter\n    self.fsm.enterInitialState()\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 113, in enterInitialState\n    self.__enter(self.__initialState, argList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\ClassicFSM.py", line 216, in __enter\n    aState.enter(argList)\n  File "C:\\Panda3D-1.11.0-x64\\direct\\fsm\\State.py", line 200, in enter\n    self.__enterFunc(*argList)\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\town\\TownBattle.py", line 347, in enterOff\n    cogPanel.hide()\n  File "C:\\Toontown\\TTR-Private-beta\\toontown\\town\\TownBattleCogPanel.py", line 163, in hide\n    self.button.hide()\nAssertionError: !is_empty() at line 1854 of D:\\Repos\\GitHub\\open-toontown\\panda3d\\built_x64\\include\\nodePath.I\n']
