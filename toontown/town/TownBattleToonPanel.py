@@ -13,9 +13,10 @@ class TownBattleToonPanel(DirectFrame):
     notify = DirectNotifyGlobal.directNotify.newCategory('TownBattleToonPanel')
 
     def __init__(self, id):
-        gui = loader.loadModel('phase_3.5/models/gui/battle_gui')
-        DirectFrame.__init__(self, relief=None, image=gui.find('**/ToonBtl_Status_BG'), image_color=Vec4(0.5, 0.9, 0.5, 0.7))
-        self.setScale(0.8)
+        gui = loader.loadModel('phase_3.5/models/gui/ttr_m_gui_bat_toonGUI')
+        gui2 = loader.loadModel('phase_3.5/models/gui/battle_gui')
+        DirectFrame.__init__(self, relief=None, image=gui, image_color=Vec4(1, 1, 1, 1))
+        self.setScale(0.05)
         self.initialiseoptions(TownBattleToonPanel)
         self.avatar = None
         self.sosText = DirectLabel(parent=self, relief=None, pos=(0.1, 0, 0.015), text=TTLocalizer.TownBattleToonSOS, text_scale=0.06)
@@ -26,9 +27,9 @@ class TownBattleToonPanel(DirectFrame):
         self.healthText = DirectLabel(parent=self, text='', pos=(-0.06, 0, -0.075), text_scale=0.055)
         self.hpChangeEvent = None
         self.gagNode = self.attachNewNode('gag')
-        self.gagNode.setPos(0.1, 0, 0.03)
+        self.gagNode.setPos(1.09178, -0.1, -0.389566)
         self.hasGag = 0
-        passGui = gui.find('**/tt_t_gui_bat_pass')
+        passGui = gui2.find('**/tt_t_gui_bat_pass')
         passGui.detachNode()
         self.passNode = self.attachNewNode('pass')
         self.passNode.setPos(0.1, 0, 0.05)

@@ -464,7 +464,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
        0,
        0,
        0),
-      (8, 9, 10),
+      (10, 11, 12),
       []]]
     SUIT_HOOD_INFO_ZONE = 0
     SUIT_HOOD_INFO_MIN = 1
@@ -817,6 +817,8 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             newSuit.setSkeleRevives(1)
         newSuit.generateWithRequired(newSuit.zoneId)
         newSuit.moveToNextLeg(None)
+        if self.zoneId == 10000:
+            newSuit.b_setSkeleRevives(random.choice([0, 0, 0, 0, 1]))
         self.suitList.append(newSuit)
         if newSuit.flyInSuit:
             self.numFlyInSuits += 1
@@ -1445,7 +1447,10 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
         if level == None:
             level = random.choice(self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_LVL])
         if type == None:
-            typeChoices = list(range(max(level - 4, 1), min(level, self.MAX_SUIT_TYPES) + 1))
+            if self.zoneId == 10000:
+                typeChoices = list(range(max(level - 4, 1), min(level, self.MAX_SUIT_TYPES+2) + 1))
+            else:
+                typeChoices = list(range(max(level - 4, 1), min(level, self.MAX_SUIT_TYPES) + 1))
             type = random.choice(typeChoices)
         else:
             level = min(max(level, type), type + 4)
