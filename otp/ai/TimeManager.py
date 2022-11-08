@@ -157,7 +157,7 @@ class TimeManager(DistributedObject.DistributedObject):
     def setExceptionInfo(self):
         info = traceback.format_exc()
         self.notify.info('Client exception: %s' % info)
-        self.sendUpdate('setExceptionInfo', [info])
+        #self.sendUpdate('setExceptionInfo', [info])
         self.cr.flush()
 
     def setStackDump(self, dump):

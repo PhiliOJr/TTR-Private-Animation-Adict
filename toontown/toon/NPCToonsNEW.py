@@ -12451,7 +12451,11 @@ def getNPCTrackHp(npcId):
         return (track, hp)
     return (None, None)
 
-
+def getNPCTrackHpRarity(npcId):
+    if npcId in npcFriends:
+        track, level, hp, rarity = npcFriends[npcId]
+        return (track, hp, rarity)
+    return (None, None)
 def getNPCTrackLevelHp(npcId):
     if npcId in npcFriends:
         track, level, hp, rarity = npcFriends[npcId]

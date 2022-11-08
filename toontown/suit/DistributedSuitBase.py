@@ -24,6 +24,7 @@ import math
 import copy
 from otp.nametag.NametagConstants import *
 from otp.nametag import NametagGlobals
+from toontown.battle import BattleGlobals
 
 class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBase.SuitBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedSuitBase')
@@ -58,6 +59,10 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
         self.maxSkeleRevives = 0
         self.sillySurgeText = False
         self.interactivePropTrackBonus = -1
+        #create a dictionary that keeps in check the status effect name, the rounds, the value.
+        self.statusEffects = {}
+        self.amtStatuses = 0
+
         return
 
     def setVirtual(self, virtual):
@@ -77,6 +82,20 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
              'dept': self.getStyleDept(),
              'level': '%s%s' % (self.getActualLevel(), TTLocalizer.SkeleRevivePostFix)}
             self.setDisplayName(nameInfo)
+            gui=loader.loadModel('phase_3.5/models/gui/ttr_m_gui_bat_statusEffect')
+            statusBack=gui.find('**/ttr_t_gui_bat_statusEffect_icon_v2_0')
+            statusBack.reparentTo(self)
+            statusBack.setPos(0, 0, self.height*1.3)
+            statusBack.setScale(0.3)
+            statusBack.setBillboardPointEye()
+            statusBack.setBin("fixed", 0)
+            statusBack.setDepthTest(False)
+            statusBack.setDepthWrite(False)
+            statusFront=gui.find('**/ttr_t_gui_bat_statusEffect_cog')
+            statusFront.reparentTo(self)
+            statusFront.setPos(0, 0, self.height*1.3)
+            statusFront.setScale(0.3)
+            statusFront.setBillboardPointEye()
         else:
             nameInfo = TTLocalizer.SuitBaseNameWithLevel % {'name': self.name,
              'dept': self.getStyleDept(),
@@ -84,6 +103,51 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
             self.setDisplayName(nameInfo)
         return
 
+    def addStatusEffect(self, effectName, rounds, value):
+        self.statusEffects[effectName] = [rounds, value]
+        self.amtStatuses += 1
+        self.createStatusEffectVisual(effectName, rounds, value)
+        return
+    def removeStatusEffect(self, effectName):
+        if effectName in self.statusEffects:
+            del self.statusEffects[effectName]
+            self.amtStatuses -= 1
+        return
+
+    def getStatusEffects(self):
+        return self.statusEffects
+
+    def createStatusEffectVisual(self, effectName, rounds, value):
+        statusPositions = {0: [Point3(0, 0, self.height*1.3)],
+                           1: [Point3(0.5, 0, self.height*1.3), Point3(-0.5, 0, self.height*1.3)],
+                           2: [Point3(1, 0, self.height*1.3), Point3(0, 0, self.height*1.3), Point3(-1, 0, self.height*1.3)],
+                           3: [Point3(1.5, 0, self.height*1.3), Point3(1, 0, self.height*1.3), Point3(-1, 0, self.height*1.3), Point3(-1.5, 0, self.height*1.3)],
+                           4: [Point3(8, 0, self.height*1.3), Point3(4, 0, self.height*1.3), Point3(0, 0, self.height*1.3), Point3(-4, 0, self.height*1.3), Point3(-8, 0, self.height*1.3)]}
+        for i in range(self.amtStatuses):
+            gui=loader.loadModel('phase_3.5/models/gui/ttr_m_gui_bat_statusEffect')
+            if effectName in BattleGlobals.effectIcons:
+                statusBack=gui.find('**/'+BattleGlobals.effectIcons[effectName])
+            else:
+                statusBack=gui.find('**/ttr_t_gui_bat_statusEffect_icon_increaseddmg')
+            statusBack.reparentTo(self)
+            statusBack.setPos(statusPositions[self.amtStatuses-1][self.amtStatuses-1])
+            statusBack.setScale(0.3)
+            statusBack.setBillboardPointEye()
+            statusBack.setBin("fixed", 0)
+            statusBack.setDepthTest(False)
+            statusBack.setDepthWrite(False)
+            statusFront=gui.find('**/ttr_t_gui_bat_statusEffect_cog')
+            statusFront.reparentTo(self)
+            statusFront.setPos(statusPositions[self.amtStatuses-1][self.amtStatuses-1])
+            statusFront.setScale(0.3)
+            statusFront.setBillboardPointEye()
+            statusBack.setBin("fixed", 0)
+            statusBack.setDepthTest(False)
+            statusBack.setDepthWrite(False)
+            statusBackFadeInLerp = LerpColorScaleInterval(statusBack, 0.5, Vec4(1, 1, 1, 1), Vec4(1, 1, 1, 0))
+            statusFrontFadeInLerp = LerpColorScaleInterval(statusFront, 0.5, Vec4(1, 1, 1, 1), Vec4(1, 1, 1, 0))
+            statusFrontFadeInLerp.start()
+            statusBackFadeInLerp.start()
     def getSkeleRevives(self):
         return self.skeleRevives
 
@@ -119,6 +183,12 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
 
     def setDNA(self, dna):
         Suit.Suit.setDNA(self, dna)
+
+    def promote(self, suitName):
+        self.dna.name = suitName
+        suitDNA = SuitDNA.SuitDNA()
+        suitDNA.newSuit(suitName)
+        self.setDNA(suitDNA)
 
     def getHP(self):
         return self.currHP
@@ -168,7 +238,7 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
             if head.isEmpty():
                 head = self.find('**/joint_head')
         else:
-            head = self.find('**/joint_head')
+            head = self.find('**/def_head')
         self.prop.reparentTo(head)
         return
 
@@ -440,6 +510,14 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
                 if self.sillySurgeText:
                     self.nametag3d.setDepthTest(0)
                     self.nametag3d.setBin('fixed', 99)
+
+                if self.getSkeleRevives():
+                    gui = loader.loadModel('phase_3.5/models/gui/ttr_m_gui_bat_statusEffect')
+                    statusBack = gui.find('**/ttr_t_gui_bat_statusEffect_icon_v2_0')
+                    statusBack.reparentTo(self.hpText)
+                    statusBack.setPos(2, 0, 0)
+                    statusBack.setScale(0.35)
+
                 self.hpText.setPos(0, 0, self.height / 2)
                 seq = Sequence(self.hpText.posInterval(1.0, Point3(0, 0, self.height + 1.5), blendType='easeOut'), Wait(0.85), self.hpText.colorInterval(0.1, Vec4(r, g, b, 0), 0.1), Func(self.hideHpText))
                 seq.start()
@@ -458,3 +536,9 @@ class DistributedSuitBase(DistributedAvatar.DistributedAvatar, Suit.Suit, SuitBa
             level = '???'
 
         return '%s\n%s\nLevel %s' % (self.getName(), self.doId, level)
+
+    def promote(self, level, suitName=None):
+        if suitName:
+            self.dna.name = suitName
+            self.sendUpdate('promote', [suitName])
+        self.setLevel(level, suitName)

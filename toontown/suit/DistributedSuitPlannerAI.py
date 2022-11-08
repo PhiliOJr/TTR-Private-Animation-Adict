@@ -20,6 +20,7 @@ import random
 from .SuitLegList import *
 from toontown.dna import *
 from otp.ai.MagicWordGlobal import *
+from toontown.hood import ZoneUtil
 
 class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlannerBase.SuitPlannerBase):
     CogdoPopFactor = config.GetFloat('cogdo-pop-factor', 1.5)
@@ -817,8 +818,8 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             newSuit.setSkeleRevives(1)
         newSuit.generateWithRequired(newSuit.zoneId)
         newSuit.moveToNextLeg(None)
-        if self.zoneId == 10000:
-            newSuit.b_setSkeleRevives(random.choice([0, 0, 0, 0, 1]))
+        if ZoneUtil.isCogHQZone(self.zoneId):
+            newSuit.addStatusEffect('damage-up', -1, 1.5)
         self.suitList.append(newSuit)
         if newSuit.flyInSuit:
             self.numFlyInSuits += 1
@@ -1448,7 +1449,7 @@ class DistributedSuitPlannerAI(DistributedObjectAI.DistributedObjectAI, SuitPlan
             level = random.choice(self.SuitHoodInfo[self.hoodInfoIdx][self.SUIT_HOOD_INFO_LVL])
         if type == None:
             if self.zoneId == 10000:
-                typeChoices = list(range(max(level - 4, 1), min(level, self.MAX_SUIT_TYPES+2) + 1))
+                typeChoices = list(range(max(level - 5, 1), min(level, self.MAX_SUIT_TYPES+2) + 1))
             else:
                 typeChoices = list(range(max(level - 4, 1), min(level, self.MAX_SUIT_TYPES) + 1))
             type = random.choice(typeChoices)

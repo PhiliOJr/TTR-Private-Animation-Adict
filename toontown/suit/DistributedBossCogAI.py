@@ -370,20 +370,28 @@ class DistributedBossCogAI(DistributedAvatarAI.DistributedAvatarAI):
 
         self.divideToons()
 
-    def generatePlannerSuits(self, cogAmt):
+    def generatePlannerSuits(self, cogAmt, minCog=1, maxCog=8, levelExtension=4, randomV2=0, maxLevel=12):
         diners = []
         for i in range(cogAmt):
-            suitType = random.randint(1, 8)
-            suitLevel = random.randint(suitType, suitType+4)
-            suit = self.__genSuitObject(self.zoneId, suitType, self.dna.dept, suitLevel, 0)
+            suitType = random.randint(minCog, maxCog)
+            suitLevel = random.randint(suitType, suitType+levelExtension)
+            if randomV2:
+                revives = random.choice([0, 0, 0, 1])
+            else:
+                revives = 0
+            if suitLevel > maxLevel:
+                suitLevel = maxLevel
+            suit = self.__genSuitObject(self.zoneId, suitType, self.dna.dept, suitLevel, revives)
             diners.append((suit, 100))
 
+
         active = []
-        for i in range(1):
-            suitType = 8
-            suitLevel = 12
-            suit = self.__genSuitObject(self.zoneId, suitType, self.dna.dept, suitLevel, 0)
-            active.append(suit)
+
+        suitType = 8
+        suitLevel = 12
+        suit = self.__genSuitObject(self.zoneId, suitType, self.dna.dept, suitLevel, 0)
+        active.append(suit)
+
 
         return {'activeSuits': active,
          'reserveSuits': diners}

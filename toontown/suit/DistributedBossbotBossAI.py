@@ -18,6 +18,16 @@ from direct.distributed.ClockDelta import globalClockDelta
 import random
 import math
 
+# Battle Globals
+from toontown.battle import BattleGlobals
+
+# Magic Word imports
+from otp.ai.MagicWordGlobal import *
+from direct.distributed.PyDatagram import PyDatagram
+from direct.distributed.MsgTypes import *
+import shlex
+from functools import reduce
+
 class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FSM):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBossbotBossAI')
     maxToonLevels = 77
@@ -90,19 +100,13 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
     def getHoodId(self):
         return ToontownGlobals.BossbotHQ
 
+    # generatePlannerSuits(self, cogAmt, minCog=1, maxCog=8, levelExtension=4, randomV2=0, maxLevel=12):
     def generateSuits(self, battleNumber):
         if battleNumber == 1:
-            weakenedValue = ((1, 1), (2, 2), (2, 2), (1, 1), (1, 1, 1, 1, 1))
-            listVersion = list(SuitBuildingGlobals.SuitBuildingInfo)
-            if config.GetBool('bossbot-boss-cheat', False):
-                listVersion[14] = weakenedValue
-                SuitBuildingGlobals.SuitBuildingInfo = tuple(listVersion)
-            retval = self.invokeSuitPlanner(14, 0)
-            return retval
+            return self.generatePlannerSuits(18, 5, 8, 5, 1, 12)
         else:
             suits = self.generateDinerSuits()
             return suits
-
     def invokeSuitPlanner(self, buildingCode, skelecog):
         suits = DistributedBossCogAI.DistributedBossCogAI.invokeSuitPlanner(self, buildingCode, skelecog)
         activeSuits = suits['activeSuits'][:]
@@ -138,6 +142,8 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
             battle.addSuit(suit)
 
         battle.generateWithRequired(self.zoneId)
+        if battleNumber == 1:
+            battle.b_setBattleTypeId(BattleGlobals.CEO_WAITER)
         return battle
 
     def initializeBattles(self, battleNumber, bossCogPosHpr):
@@ -228,7 +234,7 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
         self.numDinersPerTable = diffInfo[1]
         dinerLevel = diffInfo[2]
         for i in range(self.numTables):
-            newTable = DistributedBanquetTableAI.DistributedBanquetTableAI(self.air, self, i, self.numDinersPerTable, dinerLevel)
+            newTable = DistributedBanquetTableAI.DistributedBanquetTableAI(self.air, self, i, self.numDinersPerTable, [10, 11, 12])
             self.tables.append(newTable)
             newTable.generateWithRequired(self.zoneId)
 
@@ -334,17 +340,17 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
                 info = self.notDeadList[i]
                 suitType = info[2] - 4
                 suitLevel = info[2]
-                suit = self.__genSuitObject(self.zoneId, suitType, 'c', suitLevel, 1)
+                suit = self.__genSuitObject(self.zoneId, suitType, 'c', suitLevel, 0)
             diners.append((suit, 100))
 
         active = []
-        for i in range(2):
+        for i in range(1):
             if config.GetBool('bossbot-boss-cheat', False):
                 suit = self.__genSuitObject(self.zoneId, 2, 'c', 2, 0)
             else:
                 suitType = 8
                 suitLevel = 12
-                suit = self.__genSuitObject(self.zoneId, suitType, 'c', suitLevel, 1)
+                suit = self.__genSuitObject(self.zoneId, suitType, 'c', suitLevel, 0)
             active.append(suit)
 
         return {'activeSuits': active, 'reserveSuits': diners}
@@ -361,7 +367,10 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
 
     def __setupSuitInfo(self, suit, bldgTrack, suitLevel, suitType):
         dna = SuitDNA.SuitDNA()
-        dna.newSuitRandom(suitType, bldgTrack)
+        level2DNA = {10: 'hh',
+                     11: 'cr',
+                     12: 'tbc'}
+        dna.newSuit(level2DNA[suitLevel])
         suit.dna = dna
         self.notify.debug('Creating suit type ' + suit.dna.name + ' of level ' + str(suitLevel) + ' from type ' + str(suitType) + ' and track ' + str(bldgTrack))
         suit.setLevel(suitLevel)
@@ -753,7 +762,7 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
                 toonLevel = toon.getNumPromotions(self.dept)
                 totalCogSuitLevels += toonLevel
                 totalNumToons += 1
-                if toon.cogLevels > highestCogSuitLevel:
+                if toonLevel > highestCogSuitLevel:
                     highestCogSuitLevel = toonLevel
 
         if not totalNumToons:
@@ -922,3 +931,47 @@ class DistributedBossbotBossAI(DistributedBossCogAI.DistributedBossCogAI, FSM.FS
     def toggleMove(self):
         self.moveAttackAllowed = not self.moveAttackAllowed
         return self.moveAttackAllowed
+
+def getCEO(toon):
+    for object in list(simbase.air.doId2do.values()):
+        if isinstance(object, DistributedBossbotBossAI):
+            if toon.doId in object.involvedToons:
+                return object
+
+    return None
+
+@magicWord(category=CATEGORY_MODERATION)
+def skipCEO():
+    """
+    Skips to the third round of the CEO.
+    """
+    boss = getCEO(spellbook.getInvoker())
+    if not boss:
+        return "You aren't in a CEO!"
+    if boss.state in ('PrepareBattleTwo', 'BattleTwo'):
+        boss.exitBattleTwo()
+        boss.b_setState('PrepareBattleThree')
+        return "Skipped to Round Three in the CEO!"
+    if boss.state in ('PrepareBattleThree', 'BattleThree'):
+        boss.exitBattleThree()
+        boss.b_setState('PrepareBattleFour')
+        return "Skipped to Round Four in the CEO!"
+    if boss.state in ('PrepareBattleFour', 'BattleFour'):
+        return "You can't skip this round."
+    if "Introduction" in boss.state:
+        boss.exitIntroduction()
+    elif "BattleOne" in boss.state:
+        boss.exitBattleOne()
+    boss.b_setState('PrepareBattleTwo')
+    return "Skipped to Round Two in the CEO!"
+
+@magicWord(category=CATEGORY_SYSADMIN)
+def killCEO():
+    """
+    Kills the CEO.
+    """
+    boss = getCEO(spellbook.getInvoker())
+    if not boss:
+        return "You aren't in a CEO!"
+    boss.b_setState('Victory')
+    return 'Killed CEO.'

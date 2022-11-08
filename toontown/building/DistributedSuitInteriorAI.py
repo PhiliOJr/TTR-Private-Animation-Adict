@@ -262,6 +262,8 @@ class DistributedSuitInteriorAI(DistributedObjectAI.DistributedObjectAI):
         return None
 
     def __createFloorBattle(self):
+        from toontown.battle import BattleGlobals
+
         if self.currentFloor == self.topFloor:
             bossBattle = 1
         else:
@@ -279,6 +281,8 @@ class DistributedSuitInteriorAI(DistributedObjectAI.DistributedObjectAI):
         self.battle.helpfulToons = self.helpfulToons
         self.battle.setInitialMembers(self.toons, self.suits)
         self.battle.generateWithRequired(self.zoneId)
+        if self.currentFloor == self.topFloor:
+            self.battle.b_setBattleTypeId(BattleGlobals.BLDG_TOP_FLOOR)
         mult = getCreditMultiplier(self.currentFloor)
         if self.air.suitInvasionManager.getInvading():
             mult *= getInvasionMultiplier()

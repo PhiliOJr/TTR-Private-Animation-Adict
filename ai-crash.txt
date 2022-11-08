@@ -1,7 +1,7 @@
 Traceback (most recent call last):
-  File "C:\Toontown\Toontown - Programming\TTR-Private-AnimationAdict\TTR-Private-Animation-Adict\toontown\ai\ServiceStartAI.py", line 58, in <module>
+  File "C:\TTR-Private-Animation-Adict\toontown\ai\ServiceStartAI.py", line 58, in <module>
     run()
-  File "C:\Toontown\Toontown - Programming\TTR-Private-AnimationAdict\TTR-Private-Animation-Adict\otp\ai\AIBase.py", line 194, in run
+  File "C:\TTR-Private-Animation-Adict\otp\ai\AIBase.py", line 194, in run
     self.taskMgr.run()
   File "C:\Panda3D-1.11.0-x64\direct\task\Task.py", line 540, in run
     self.step()
@@ -9,13 +9,19 @@ Traceback (most recent call last):
     self.mgr.poll()
   File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 612, in readerPollUntilEmpty
     while self.readerPollOnce():
-  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 619, in readerPollOnce
-    self.handleDatagram(self.private__di)
-  File "C:\Panda3D-1.11.0-x64\direct\distributed\AstronInternalRepository.py", line 232, in handleDatagram
-    self.handleObjEntry(di, msgType == STATESERVER_OBJECT_ENTER_AI_WITH_REQUIRED_OTHER)
-  File "C:\Panda3D-1.11.0-x64\direct\distributed\AstronInternalRepository.py", line 298, in handleObjEntry
-    do.updateAllRequiredOtherFields(dclass, di)
-  File "C:\Panda3D-1.11.0-x64\direct\distributed\DistributedObjectAI.py", line 265, in updateAllRequiredOtherFields
-    dclass.receiveUpdateOther(self, di)
-TypeError: setState() takes 2 positional arguments but 3 were given
+  File "C:\Panda3D-1.11.0-x64\direct\distributed\ConnectionRepository.py", line 617, in readerPollOnce
+    if self.checkDatagram():
+  File "C:\TTR-Private-Animation-Adict\toontown\battle\DistributedBattleBaseAI.py", line 1079, in requestAttack
+    self.__requestMovie()
+  File "C:\TTR-Private-Animation-Adict\toontown\battle\DistributedBattleBaseAI.py", line 1144, in __requestMovie
+    self.__makeMovie()
+  File "C:\TTR-Private-Animation-Adict\toontown\battle\DistributedBattleBaseAI.py", line 1170, in __makeMovie
+    self.battleCalc.calculateRound()
+  File "C:\TTR-Private-Animation-Adict\toontown\battle\BattleCalculatorAI.py", line 1391, in calculateRound
+    self.__calculateSuitAttacks()
+  File "C:\TTR-Private-Animation-Adict\toontown\battle\BattleCalculatorAI.py", line 1257, in __calculateSuitAttacks
+    self.__calcSuitAtkHp(i)
+  File "C:\TTR-Private-Animation-Adict\toontown\battle\BattleCalculatorAI.py", line 1176, in __calcSuitAtkHp
+    if 'cogs-weaken' in self.battle.statusEffects:
+AttributeError: 'DistributedBattleAI' object has no attribute 'statusEffects'
 

@@ -8,6 +8,7 @@ from toontown.toon import NPCToons
 from toontown.pets import PetTricks, DistributedPetProxyAI
 from direct.showbase.PythonUtil import lerp
 from otp.ai.MagicWordGlobal import *
+from toontown.suit import SuitDNA
 
 battleSkip = 0
 
@@ -493,7 +494,7 @@ class BattleCalculatorAI:
                 elif atkTrack == FIRE:
                     suit = self.battle.findSuit(targetId)
                     if suit:
-                        costToFire = 1
+                        costToFire = round(SuitDNA.getSuitType(suit.dna.name) / 2)
                         abilityToFire = toon.getPinkSlips()
                         numLeft = abilityToFire - costToFire
                         if numLeft < 0:
@@ -551,7 +552,11 @@ class BattleCalculatorAI:
                     self.notify.debug('Updating lure damage to ' + str(result))
                     self.successfulLures[targetId][3] = result
                 else:
-                    attack[TOON_HP_COL][targetIndex] = result
+                    suit = self.battle.findSuit(targetId)
+                    if suit.getSkeleRevives():
+                        attack[TOON_HP_COL][targetIndex] = (result - suit.getActualLevel() * 1.5)
+                    else:
+                        attack[TOON_HP_COL][targetIndex] = round(result)
                 if result > 0 and atkTrack != HEAL and atkTrack != DROP and atkTrack != PETSOS:
                     attackTrack = LURE
                     lureInfos = self.__getLuredExpInfo(targetId)
@@ -1165,6 +1170,14 @@ class BattleCalculatorAI:
                 theSuit = self.battle.findSuit(attack[SUIT_ID_COL])
                 atkInfo = SuitBattleGlobals.getSuitAttack(theSuit.dna.name, theSuit.getLevel(), atkType)
                 result = atkInfo['hp']
+                #get the suits status effect Dictionary, check if the status effect name 'damage-up' is in the dictionary, if it is, multiply the damage by the value in the status effects list
+                if 'damage-up' in theSuit.statusEffects:
+                    result *= theSuit.statusEffects['damage-up'][1]
+
+                if 'cogs-weaken' in theSuit.statusEffects:
+                    result = round(result * theSuit.statusEffects['cogs-weaken'][1])
+
+
             targetIndex = self.battle.activeToons.index(toonId)
             attack[SUIT_HP_COL][targetIndex] = result
 
@@ -1319,7 +1332,7 @@ class BattleCalculatorAI:
         toonsHit = 0
         cogsMiss = 0
         for special in specials:
-            npc_track, rounds = NPCToons.getNPCTrackHp(special[TOON_TGT_COL])
+            npc_track, rounds, rarity = NPCToons.getNPCTrackHpRarity(special[TOON_TGT_COL])
             if npc_track == NPC_TOONS_HIT:
                 if self.roundsToonsHit < rounds:
                     self.roundsToonsHit = rounds
@@ -1329,17 +1342,12 @@ class BattleCalculatorAI:
                     self.toonsAlwaysHit = 1
                     toonsHit = 1
             elif npc_track == NPC_COGS_MISS:
-                if self.roundsCogsMiss < rounds:
-                    self.roundsCogsMiss = rounds
-                    self.suitsAlwaysMiss = 1
-                    cogsMiss = 1
-                else:
-                    self.suitsAlwaysMiss = 1
-                    cogsMiss = 1
+                for suit in self.battle.activeSuits:
+                    suit.addStatusEffect('cogs-weaken', rounds, rarity*.10)
         if self.roundsToonsHit > 0:
            toonsHit =1
-        if self.roundsCogsMiss > 0:
-           cogsMiss =1
+        #if self.roundsCogsMiss > 0:
+           #cogsMiss =1
 
         if self.notify.getDebug():
             self.notify.debug('Toon attack order: ' + str(self.toonAtkOrder))

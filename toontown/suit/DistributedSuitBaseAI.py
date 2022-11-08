@@ -22,6 +22,9 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
         self.maxSkeleRevives = 0
         self.reviveFlag = 0
         self.buildingHeight = None
+
+        self.statusEffects = {}
+
         return
 
     def generate(self):
@@ -41,18 +44,37 @@ class DistributedSuitBaseAI(DistributedAvatarAI.DistributedAvatarAI, SuitBase.Su
             self.requestDelete()
         return
 
-    def setLevel(self, lvl = None):
-        attributes = SuitBattleGlobals.SuitAttributes[self.dna.name]
-        if lvl is not None:
-            self.level = lvl - attributes['level'] - 1
+    def setLevel(self, lvl=None, newDNA=None):
+        if newDNA:
+            attributes=SuitBattleGlobals.SuitAttributes[newDNA]
         else:
-            self.level = SuitBattleGlobals.pickFromFreqList(attributes['freq'])
+            attributes=SuitBattleGlobals.SuitAttributes[self.dna.name]
+        if lvl:
+            self.level=lvl - attributes['level'] - 1
+        else:
+            self.level=SuitBattleGlobals.pickFromFreqList(attributes['freq'])
         self.notify.debug('Assigning level ' + str(lvl))
         if hasattr(self, 'doId'):
             self.d_setLevelDist(self.level)
-        hp = attributes['hp'][self.level]
-        self.maxHP = hp
-        self.currHP = hp
+        try:
+            hp=attributes['hp'][self.level]
+        except:
+            hp=(lvl + 1) * (lvl + 2)
+        self.maxHP=hp
+        self.currHP=hp
+
+    def addStatusEffect(self, effectName, rounds, value):
+        self.statusEffects[effectName] = [rounds, value]
+        self.sendUpdate('addStatusEffect', [effectName, rounds, value])
+
+    def removeStatusEffect(self, effectName):
+        if effectName in self.statusEffects:
+            del self.statusEffects[effectName]
+        self.sendUpdate('removeStatusEffect', [effectName])
+
+    def getStatusEffects(self):
+        return self.statusEffects
+
 
     def getLevelDist(self):
         return self.getLevel()

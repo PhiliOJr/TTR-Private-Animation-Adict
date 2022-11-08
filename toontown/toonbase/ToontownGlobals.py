@@ -1518,7 +1518,8 @@ BossbotElevCamPosHpr = (0,
  0)
 BossbotFoodModelScale = 0.75
 BossbotNumFoodToExplode = 3
-BossbotBossServingDuration = 300
+#BossbotBossServingDuration = 300
+BossbotBossServingDuration = 1
 BossbotPrepareBattleThreeDuration = 20
 WaiterBattleAPosHpr = (20,
  -400,

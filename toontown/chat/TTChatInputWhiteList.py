@@ -103,7 +103,10 @@ class TTChatInputWhiteList(ChatInputWhiteListFrame):
             return
         else:
             ChatInputWhiteListFrame.sendChat(self, self.chatEntry.get())
-            base.localAvatar.enableAvatarControls()
+            try:
+                base.localAvatar.enableAvatarControls()
+            except:
+                pass
 
     def sendChatByData(self, text):
         if self.trueFriendChat:

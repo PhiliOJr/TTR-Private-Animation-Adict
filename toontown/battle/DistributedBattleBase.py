@@ -22,6 +22,7 @@ from toontown.toon import TTEmote
 from otp.avatar import Emote
 from otp.nametag.NametagConstants import *
 from otp.nametag import NametagGlobals
+from . import BattleGlobals
 
 class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBattleBase')
@@ -57,6 +58,9 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         self.needAdjustTownBattle = 0
         self.streetBattle = 1
         self.levelBattle = 0
+
+        self.battleTypeId = BattleGlobals.NORMAL_BATTLE
+
         self.localToonFsm = ClassicFSM.ClassicFSM('LocalToon', [State.State('HasLocalToon', self.enterHasLocalToon, self.exitHasLocalToon, ['NoLocalToon', 'WaitForServer']), State.State('NoLocalToon', self.enterNoLocalToon, self.exitNoLocalToon, ['HasLocalToon', 'WaitForServer']), State.State('WaitForServer', self.enterWaitForServer, self.exitWaitForServer, ['HasLocalToon', 'NoLocalToon'])], 'WaitForServer', 'WaitForServer')
         self.localToonFsm.enterInitialState()
         self.fsm = ClassicFSM.ClassicFSM('DistributedBattle', [State.State('Off', self.enterOff, self.exitOff, ['FaceOff',
@@ -92,6 +96,11 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         self.__battleCleanedUp = 0
         self.reparentTo(render)
         self._skippingRewardMovie = False
+
+    def setBattleTypeId(self, battleTypeId: int):
+        self.battleTypeId = battleTypeId
+    def getBattleTypeId(self):
+        return self.battleTypeId
 
     def storeInterval(self, interval, name):
         if name in self.activeIntervals:
@@ -543,13 +552,14 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         self.notify.debug('adjust(%f) from server' % globalClockDelta.localElapsedTime(timestamp))
         self.adjustFsm.request('Adjusting', [globalClockDelta.localElapsedTime(timestamp)])
 
-    def setMovie(self, active, toons, suits, id0, tr0, le0, tg0, hp0, ac0, hpb0, kbb0, died0, revive0, id1, tr1, le1, tg1, hp1, ac1, hpb1, kbb1, died1, revive1, id2, tr2, le2, tg2, hp2, ac2, hpb2, kbb2, died2, revive2, id3, tr3, le3, tg3, hp3, ac3, hpb3, kbb3, died3, revive3, sid0, at0, stg0, dm0, sd0, sb0, st0, sid1, at1, stg1, dm1, sd1, sb1, st1, sid2, at2, stg2, dm2, sd2, sb2, st2, sid3, at3, stg3, dm3, sd3, sb3, st3):
+    def setMovie(self, battleMovie):
         if self.__battleCleanedUp:
             return
-        self.notify.debug('setMovie()')
-        if int(active) == 1:
-            self.notify.debug('setMovie() - movie is active')
-            self.movie.genAttackDicts(toons, suits, id0, tr0, le0, tg0, hp0, ac0, hpb0, kbb0, died0, revive0, id1, tr1, le1, tg1, hp1, ac1, hpb1, kbb1, died1, revive1, id2, tr2, le2, tg2, hp2, ac2, hpb2, kbb2, died2, revive2, id3, tr3, le3, tg3, hp3, ac3, hpb3, kbb3, died3, revive3, sid0, at0, stg0, dm0, sd0, sb0, st0, sid1, at1, stg1, dm1, sd1, sb1, st1, sid2, at2, stg2, dm2, sd2, sb2, st2, sid3, at3, stg3, dm3, sd3, sb3, st3)
+
+        movieHasBeenMade, activeToons, activeSuits, toonAttacks, suitAttacks,=battleMovie
+
+        if movieHasBeenMade:
+            self.movie.genAttackDicts(activeToons, activeSuits, toonAttacks, suitAttacks)
 
     def setChosenToonAttacks(self, ids, tracks, levels, targets):
         if self.__battleCleanedUp:
@@ -1018,7 +1028,8 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
     def __enterLocalToonWaitForInput(self):
         self.notify.debug('enterLocalToonWaitForInput()')
         camera.setPosHpr(self.camPos, self.camHpr)
-        base.camLens.setMinFov(self.camMenuFov/(4./3.))
+        camFOV = self.camMenuFov/(4./3.)
+        base.camLens.setMinFov(camFOV)
         NametagGlobals.setMasterArrowsOn(0)
         self.townBattle.setState('Attack')
         self.accept(self.localToonBattleEvent, self.__handleLocalToonBattleEvent)
@@ -1062,7 +1073,10 @@ class DistributedBattleBase(DistributedNode.DistributedNode, BattleBase):
         self.notify.debug('exitWaitForInput()')
         if self.localToonActive():
             self.townBattle.setState('Off')
-            base.camLens.setMinFov(self.camFov/(4./3.))
+            camFOV=self.camFov / (4. / 3.)
+            if self.battleTypeId in (BattleGlobals.CEO_WAITER, BattleGlobals.BLDG_TOP_FLOOR):
+                camFOV += 10
+            base.camLens.setMinFov(camFOV)
             self.ignore(self.localToonBattleEvent)
             self.__stopTimer()
         return None

@@ -65,19 +65,19 @@ def __getSuitTrack(sound, lastSoundThatHit, delay, hitCount, targets, totalDamag
     attacks = 0
     uberDelay = 0.0
     isUber = 0
+    battle=sound['battle']
     if sound['level'] >= ToontownBattleGlobals.UBER_GAG_LEVEL_INDEX:
         uberDelay = 3.0
         isUber = 1
     for target in targets:
         suit = target['suit']
-        if totalDamage > 0 and sound == lastSoundThatHit:
+        if totalDamage[battle.activeSuits.index(suit)] > 0 and sound == lastSoundThatHit:
             hp = target['hp']
             died = target['died']
-            battle = sound['battle']
             kbbonus = target['kbbonus']
             suitTrack = Sequence()
-            showDamage = Func(suit.showHpText, -totalDamage, openEnded=0)
-            updateHealthBar = Func(suit.updateHealthBar, totalDamage)
+            showDamage = Func(suit.showHpText, -totalDamage[battle.activeSuits.index(suit)], openEnded=0)
+            updateHealthBar = Func(suit.updateHealthBar, totalDamage[battle.activeSuits.index(suit)])
             if isUber:
                 breakEffect = BattleParticles.createParticleEffect(file='soundBreak')
                 breakEffect.setDepthWrite(0)
@@ -108,7 +108,7 @@ def __getSuitTrack(sound, lastSoundThatHit, delay, hitCount, targets, totalDamag
                 tracks.append(suitTrack)
             else:
                 tracks.append(Parallel(suitTrack, bonusTrack))
-        elif totalDamage <= 0:
+        elif totalDamage[battle.activeSuits.index(suit)] <= 0:
             tracks.append(Sequence(Wait(2.9), Func(MovieUtil.indicateMissed, suit, 1.0)))
 
     return tracks
@@ -136,7 +136,8 @@ def __doSoundsLevel(sounds, delay, hitCount, npcs):
         hpbonus = sound['hpbonus']
         attackMTrack = soundfn_array[sound['level']](sound, delay, toon, targets, level)
         tracks.append(Sequence(Wait(delay), attackMTrack))
-        tracks.append(__getSuitTrack(sound, lastSoundThatHit, delay, hitCount, targets, totalDamage, hpbonus, toon, npcs))
+        battle = sound['battle']
+        tracks.append(__getSuitTrack(sound, lastSoundThatHit, delay, hitCount, targets, sound['all_hp'], hpbonus, toon, npcs))
         for target in targets:
             battle = sound['battle']
             suit = target['suit']
