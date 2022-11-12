@@ -18,6 +18,7 @@ from toontown.toonbase import ToontownGlobals
 import random
 from toontown.toon import NPCToons
 from . import BattleGlobals
+from . import ContentSync
 
 class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBase):
     notify = DirectNotifyGlobal.directNotify.newCategory('DistributedBattleBaseAI')
@@ -49,6 +50,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.toonOrigMerits = {}
         self.toonMerits = {}
         self.toonParts = {}
+        self.syncer = ContentSync.ContentSync(self)
         self.battleTypeId=BattleGlobals.NORMAL_BATTLE
         self.battleCalc = BattleCalculatorAI.BattleCalculatorAI(self, tutorialFlag)
         if self.air.suitInvasionManager.getInvading():
@@ -78,6 +80,7 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.numNPCAttacks = 0
         self.npcAttacks = {}
         self.pets = {}
+        self.dmgCap = 0
         self.fsm = ClassicFSM.ClassicFSM('DistributedBattleAI', [State.State('FaceOff', self.enterFaceOff, self.exitFaceOff, ['WaitForInput', 'Resume']),
          State.State('WaitForJoin', self.enterWaitForJoin, self.exitWaitForJoin, ['WaitForInput', 'Resume']),
          State.State('WaitForInput', self.enterWaitForInput, self.exitWaitForInput, ['MakeMovie', 'Resume']),
@@ -108,6 +111,12 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
     def b_setBattleTypeId(self, battleTypeId: int):
         self.setBattleTypeId(battleTypeId)
         self.d_setBattleTypeId(battleTypeId)
+
+    def setHeadSuitFight(self, headSuit: str):
+        self.headSuit = headSuit
+        self.syncContent(self.headSuit)
+    def syncContent(self, headSuit: str):
+        pass
 
     def getBattleTypeId(self):
         return self.battleTypeId
@@ -234,6 +243,12 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
 
     def getState(self):
         return [self.fsm.getCurrentState().getName(), globalClockDelta.getRealNetworkTime()]
+
+    def setDmgCap(self, cap):
+        self.dmgCap = cap
+
+    def getDmgCap(self, cap):
+        return self.dmgCap
 
     def d_setMembers(self):
         self.notify.debug('network:setMembers()')
@@ -1228,6 +1243,8 @@ class DistributedBattleBaseAI(DistributedObjectAI.DistributedObjectAI, BattleBas
         self.resetResponses()
         self.__requestAdjust()
         for suit in self.activeSuits:
+            if suit.dna.name in BattleGlobals.headSuits:
+                self.setHeadSuitFight(suit.dna.name)
             if self.battleTypeId == 2 and suit not in self.statusSuits:
                 suit.addStatusEffect('damage-up', -1, 1.5)
                 self.statusSuits.append(suit)

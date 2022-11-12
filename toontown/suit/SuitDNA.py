@@ -108,20 +108,14 @@ def getSuitBodyType(name):
     else:
         print('Unknown body type for suit name: ', name)
 
-
+dept2Names = {'c': ['f', 'p', 'ym', 'mm', 'ds', 'hh', 'cr', 'tbc'],
+              'l': ['bf', 'b', 'dt', 'ac', 'bs', 'sd', 'le', 'bw'],
+              'm': ['sc', 'pp', 'tw', 'bc', 'nc', 'mb', 'ls', 'rb'],
+              's': ['cc', 'tm', 'nd', 'gh', 'ms', 'tf', 'm', 'mh']}
 def getSuitDept(name):
-    index = suitHeadTypes.index(name)
-    if index < suitsPerDept:
-        return suitDepts[0]
-    elif index < suitsPerDept * 2:
-        return suitDepts[1]
-    elif index < suitsPerDept * 3:
-        return suitDepts[2]
-    elif index < suitsPerDept * 4:
-        return suitDepts[3]
-    else:
-        print('Unknown dept for suit name: ', name)
-        return None
+    for dept in suitDepts:
+        if name in dept2Names[dept]:
+            return dept
     return None
 
 
@@ -148,7 +142,7 @@ def getRandomSuitType(level, rng = random):
 
 def getRandomSuitByDept(dept):
     deptNumber = suitDepts.index(dept)
-    return suitHeadTypes[suitsPerDept * deptNumber + random.randint(0, 7)]
+    return suitHeadTypes[len(dept2Names[dept]) * deptNumber + random.randint(0, 7)]
 
 
 class SuitDNA(AvatarDNA.AvatarDNA):

@@ -555,8 +555,12 @@ class BattleCalculatorAI:
                     suit = self.battle.findSuit(targetId)
                     if suit.getSkeleRevives():
                         attack[TOON_HP_COL][targetIndex] = (result - suit.getActualLevel() * 1.5)
+                        if self.battle.dmgCap:
+                            attack[TOON_HP_COL][targetIndex] = self.battle.dmgCap
                     else:
                         attack[TOON_HP_COL][targetIndex] = round(result)
+                        if self.battle.dmgCap:
+                            attack[TOON_HP_COL][targetIndex] = self.battle.dmgCap
                 if result > 0 and atkTrack != HEAL and atkTrack != DROP and atkTrack != PETSOS:
                     attackTrack = LURE
                     lureInfos = self.__getLuredExpInfo(targetId)

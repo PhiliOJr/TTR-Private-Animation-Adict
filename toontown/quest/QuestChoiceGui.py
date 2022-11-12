@@ -19,6 +19,17 @@ class QuestChoiceGui(DirectFrame):
         self.timer = ToontownTimer.ToontownTimer()
         self.timer.reparentTo(self)
         self.timer.setScale(0.3)
+        #make a DirectScrolledList
+        self.dScrollList = DirectScrolledList(
+            parent = self,
+            relief = None,
+            pos = (0, 0, 0),
+            incButton_pos=(.5, 0, .5), incButton_text="Inc",
+            incButton_scale=0.3,
+            decButton_pos=(-.5, 0, -.5), decButton_text="Dec",
+            decButton_scale=0.3,
+        )
+
         base.setCellsAvailable(base.leftCells, 0)
         base.setCellsAvailable([base.bottomCells[0], base.bottomCells[1]], 0)
         return
@@ -31,25 +42,10 @@ class QuestChoiceGui(DirectFrame):
             qp.showChoicePoster(questId, fromNpcId, toNpcId, rewardId, self.chooseQuest)
             self.questChoicePosters.append(qp)
 
-        if len(quests) == 1 * 3:
-            self['geom_scale'] = (1, 1, 0.9)
-            self.questChoicePosters[0].setPos(0, 0, 0.1)
-            self.cancelButton.setPos(0.15, 0, -0.375)
-            self.timer.setPos(-0.2, 0, -0.35)
-        elif len(quests) == 2 * 3:
-            self['geom_scale'] = (1.5, 1, 0.9)
-            self.questChoicePosters[0].setPos(0, 0, -0.2)
-            self.questChoicePosters[1].setPos(0, 0, 0.4)
-            self.cancelButton.setPos(0.15, 0, -0.625)
-            self.timer.setPos(-0.2, 0, -0.6)
-        elif len(quests) == 3 * 3:
-            self['geom_scale'] = (1.85, 1, 0.9)
-            list(map(lambda x: x.setScale(0.95), self.questChoicePosters))
-            self.questChoicePosters[0].setPos(0, 0, -0.4)
-            self.questChoicePosters[1].setPos(0, 0, 0.125)
-            self.questChoicePosters[2].setPos(0, 0, 0.65)
-            self.cancelButton.setPos(0.15, 0, -0.8)
-            self.timer.setPos(-0.2, 0, -0.775)
+
+        for qst in self.questChoicePosters:
+            self.dScrollList.addItem(qst)
+
         self.timer.countdown(timeout, self.timeout)
 
     def chooseQuest(self, questId):
